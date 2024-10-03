@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSCode Simulação - Tema Dracula</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        .typing-animation {
+            overflow: hidden;
+            border-right: .15em solid orange;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 0 auto;
+            animation: 
+                typing 15s steps(1000, end),
+                blink-caret .75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
+        .dracula-theme { color: #f8f8f2; background-color: #282a36; border-radius: 10px; padding: 10px; }
+        .dracula-keyword { color: #ff79c6; }
+        .dracula-function { color: #50fa7b; }
+        .dracula-string { color: #f1fa8c; }
+        .dracula-number { color: #bd93f9; }
+        .dracula-comment { color: #6272a4; }
+    </style>
+</head>
+<body class="bg-[#282a36] text-[#f8f8f2] font-['JetBrains_Mono']">
+    <div class="container mx-auto p-4">
+        <div class="bg-[#44475a] rounded-lg shadow-lg p-4">
+            <div class="flex items-center mb-4">
+                <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                <span class="ml-4 text-sm text-gray-400">cypress/e2e/template.cy.js</span>
+            </div>
+            <pre class="text-sm dracula-theme"><code class="language-javascript typing-animation">
+                
+                
+                <span class="dracula-keyword">describe</span>(<span class="dracula-string">'Teste de UI: Adicionar Tarefas'</span>, () => {
+                  <span class="dracula-keyword">it</span>(<span class="dracula-string">'Deve adicionar tarefas na lista'</span>, () => {
+                    <span class="dracula-comment">// Visita a página da aplicação</span>
+                    cy.<span class="dracula-function">visit</span>(<span class="dracula-string">'https://example.cypress.io/'</span>)
+                
+                    <span class="dracula-comment">// Encontra o campo de entrada e adiciona uma nova tarefa</span>
+                    cy.<span class="dracula-function">get</span>(<span class="dracula-string">'[data-testid="new-todo"]'</span>)
+                      .<span class="dracula-function">type</span>(<span class="dracula-string">'Escrever código{enter}'</span>)
+                      .<span class="dracula-function">type</span>(<span class="dracula-string">'Escrever testes{enter}'</span>)
+                
+                    <span class="dracula-comment">// Verifica se a aplicação mostra duas tarefas</span>
+                    cy.<span class="dracula-function">get</span>(<span class="dracula-string">'[data-testid="todos"]'</span>).<span class="dracula-function">should</span>(<span class="dracula-string">'have.length'</span>, <span class="dracula-number">2</span>)
+                  })
+                })
+
+                <span class="dracula-comment">// Adiciona tratamento para exceções não capturadas</span>
+                Cypress.<span class="dracula-function">on</span>(<span class="dracula-string">'uncaught:exception'</span>, (<span class="dracula-keyword">err</span>, runnable) => {
+                  <span class="dracula-comment">// Retorna false para evitar que o Cypress falhe o teste</span>
+                  <span class="dracula-keyword">if</span> (err.message.<span class="dracula-function">includes</span>(<span class="dracula-string">'Error'</span>)) {
+                    <span class="dracula-keyword">return</span> <span class="dracula-keyword">false</span>;
+                  }
+                  <span class="dracula-comment">// Para outros erros, deixe o Cypress lidar normalmente</span>
+                  <span class="dracula-keyword">return</span> <span class="dracula-keyword">true</span>;
+                });
+
+
+                <span class="dracula-keyword">describe</span>(<span class="dracula-string">'Teste de API: Adicionar Tarefa'</span>, () => {
+                    <span class="dracula-keyword">it</span>(<span class="dracula-string">'Deve adicionar uma nova tarefa via API'</span>, () => {
+                      cy.<span class="dracula-function">request</span>({
+                        url: <span class="dracula-string">'/todos'</span>,
+                        method: <span class="dracula-string">'POST'</span>,
+                        body: {
+                          title: <span class="dracula-string">'Escrever REST API'</span>,
+                        },
+                      })
+                      .<span class="dracula-function">its</span>(<span class="dracula-string">'body'</span>)
+                      .<span class="dracula-function">should</span>(<span class="dracula-string">'deep.contain'</span>, {
+                        title: <span class="dracula-string">'Escrever REST API'</span>,
+                        completed: <span class="dracula-keyword">false</span>,
+                      })
+                    })
+                  })
+            </code></pre>
+        </div>
+    </div>
+</body>
+</html>
